@@ -1,30 +1,22 @@
 package com.fag.lucasmartins.arquitetura_software.infrastructure.adapters.in.rest.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 
 public class ErrorDTO {
+    private int status;
+    private String message;
+    private LocalDateTime timestamp;
 
-    private final String message;
-    private final LocalDateTime timestamp;
-    private final int status;
-
-    public ErrorDTO(String message, LocalDateTime timestamp, int status) {
+    public ErrorDTO(int status, String message, LocalDateTime timestamp) {
+        this.status = status;
         this.message = message;
         this.timestamp = timestamp;
-        this.status = status;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss")
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public int getStatus() {
-        return status;
-    }
+    public int getStatus() { return status; }
+    public void setStatus(int status) { this.status = status; }
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
+    public LocalDateTime getTimestamp() { return timestamp; }
+    public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
 }
