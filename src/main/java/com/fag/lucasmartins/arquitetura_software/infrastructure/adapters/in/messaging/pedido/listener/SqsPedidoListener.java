@@ -1,5 +1,6 @@
 package com.fag.lucasmartins.arquitetura_software.infrastructure.adapters.in.messaging.pedido.listener;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.awspring.cloud.sqs.annotation.SqsListener;
@@ -26,8 +27,8 @@ public class SqsPedidoListener {
     }
 
     @SqsListener( value= "${aws.order-event}")
-    public void receiveMessage(String message) {
-        try {
+    public void receiveMessage(String message) throws JsonProcessingException {
+        
             PedidoSqsEventDTO dto =
                     objectMapper.readValue(message, PedidoSqsEventDTO.class);
 
@@ -37,8 +38,6 @@ public class SqsPedidoListener {
 
             System.out.println("Pedido processado com sucesso via SQS!");
 
-        } catch (Exception e) {
-            System.err.println("Erro ao processar mensagem SQS: " + e.getMessage());
-        }
+        
     }
 }
